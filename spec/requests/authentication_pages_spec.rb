@@ -6,9 +6,12 @@ describe "Authentication" do
 
   describe "signin page" do
     before { visit signin_path }
+    let(:user) { FactoryGirl.create(:user) }
 
     it { should have_content('Sign in') }
     it { should have_title('Sign in') }
+    it { should_not have_link('Profile',     href: user_path(user)) }
+    it { should_not have_link('Settings',    href: edit_user_path(user)) }
   end
 
   describe "signin" do
